@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pakistan's No. 1 Crockery Store, Providing a Vast Range of Variety.">
+    
+    <title>Onyourshelf - Premium Crockery Store in Pakistan</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons (optional but useful) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="//onyourshelf.pk/cdn/shop/files/onyourshelf.jpg?crop=center&amp;height=32&amp;v=1723283626&amp;width=32">
+    
+    <!-- Custom CSS (overrides) -->
+    <style>
+        :root {
+            --primary-color: #FFD000;
+            --announcement-bg: #ffe6e6;
+            --sale-color: #dc3545;
+        }
+        
+        /* Announcement Bar */
+        .announcement-bar {
+            background: var(--announcement-bg);
+            color: #333;
+            padding: 12px 0;
+            position: relative;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .announcement-close {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            font-size: 18px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+            padding: 5px;
+        }
+        
+        .announcement-close:hover {
+            opacity: 1;
+            color: #333;
+        }
+        
+        /* Custom Navbar Styles */
+        .navbar-custom {
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-custom.sticky {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+        }
+        
+        .navbar-custom .navbar-nav .nav-link {
+            color: #333;
+            font-weight: 500;
+            padding: 20px 15px !important;
+            transition: color 0.3s;
+        }
+        
+        .navbar-custom .navbar-nav .nav-link:hover,
+        .navbar-custom .navbar-nav .nav-link.active {
+            color: var(--primary-color);
+        }
+        
+        .navbar-custom .navbar-nav .nav-link.sale {
+            color: var(--sale-color);
+        }
+        
+        /* Dropdown Menu */
+        .navbar-custom .dropdown-menu {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 5px;
+            padding: 10px 0;
+            min-width: 200px;
+        }
+        
+        .navbar-custom .dropdown-item {
+            padding: 10px 20px;
+            transition: all 0.3s;
+        }
+        
+        .navbar-custom .dropdown-item:hover {
+            background: none;
+            color: var(--primary-color);
+            padding-left: 25px;
+        }
+        
+        /* Action Buttons */
+        .action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            color: #333;
+            position: relative;
+            padding: 0;
+        }
+        
+        .action-btn:hover {
+            background-color: #f5f5f5;
+            transform: scale(1.1);
+        }
+        
+        .action-btn i {
+            font-size: 1.2rem;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background-color: #ff6b6b;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            min-width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+        }
+        
+        /* Hero Slider */
+        .hero-section {
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-slider .carousel-item {
+            height: 600px;
+        }
+        
+        .hero-slider .carousel-item img {
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+        }
+        
+        .carousel-caption {
+            background: linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,0.2));
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .carousel-caption h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .carousel-caption p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .carousel-caption .btn {
+            padding: 12px 30px;
+            background: var(--primary-color);
+            color: #333;
+            font-weight: 600;
+            border-radius: 50px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .carousel-caption .btn:hover {
+            background: transparent;
+            border-color: white;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Carousel Controls */
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.7;
+            transition: all 0.3s;
+        }
+        
+        .carousel-control-prev:hover,
+        .carousel-control-next:hover {
+            opacity: 1;
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .carousel-control-prev {
+            left: 20px;
+        }
+        
+        .carousel-control-next {
+            right: 20px;
+        }
+        
+        /* Background Content Section */
+        .background-content {
+            height: 100vh;
+            background-image: url('back.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 20px auto;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            max-width: calc(100% - 32px);
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+        
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            max-width: 800px;
+        }
+        
+        .content-wrapper h2 {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .content-wrapper p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero-slider .carousel-item {
+                height: 400px;
+            }
+            
+            .carousel-caption h1 {
+                font-size: 28px;
+            }
+            
+            .carousel-caption p {
+                font-size: 16px;
+            }
+            
+            .content-wrapper h2 {
+                font-size: 24px;
+            }
+            
+            .content-wrapper p {
+                font-size: 16px;
+            }
+            
+            .carousel-control-prev,
+            .carousel-control-next {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body style="margin: 0 16px; padding: 20px;">
+    <!-- Page Transition -->
+    <div class="m-page-transition" style="display: none;"></div>
+    
+    <!-- Announcement Bar -->
+    <div class="announcement-bar" id="announcementBar">
+        <div class="container">
+            <div class="announcement-content text-center">
+                <span class="announcement-text">
+                    Look No Further - Your Find For a Dreamy Tableware Ends Here.
+                </span>
+            </div>
+        </div>
+        <button class="announcement-close" onclick="closeAnnouncement()" aria-label="Close">
+            <i class="bi bi-x-lg"></i>
+        </button>
+    </div>
+    
+    <!-- Navbar (Bootstrap) -->
+    <nav class="navbar navbar-expand-lg navbar-custom" id="navbar">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand" href="/">
+                <img src="logo.webp" alt="onyourshelf" height="50" width="50" class="rounded-circle">
+            </a>
+            
+            <!-- Mobile Toggle -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <!-- Navbar Content -->
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <!-- Navigation Menu -->
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Home</a>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/collections" role="button" data-bs-toggle="dropdown">
+                            All Products
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/collections/mugs">Mugs</a></li>
+                            <li><a class="dropdown-item" href="/collections/tea-set">Tea Sets</a></li>
+                            <li><a class="dropdown-item" href="/collections/plate-sets">Plate Sets</a></li>
+                            <li><a class="dropdown-item" href="/collections/bowls">Bowls Set</a></li>
+                            <li><a class="dropdown-item" href="/collections/dinner-sets">Dinner Sets</a></li>
+                            <li><a class="dropdown-item" href="/collections/cutlery">Cutlery</a></li>
+                            <li><a class="dropdown-item" href="/collections/drinkware">Drinkware</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/collections/new-arrivals">New Arrivals</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link sale" href="/collections/sale">Sale</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/collections/trending-products">Trending</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pages/customer-love">Customer Love</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pages/contact">Contact</a>
+                    </li>
+                </ul>
+                
+                <!-- Action Buttons -->
+                <div class="d-flex gap-2">
+                    <button class="action-btn" id="searchBtn" aria-label="Search">
+                        <i class="bi bi-search"></i>
+                    </button>
+                    
+                    <button class="action-btn" id="accountBtn" aria-label="Account">
+                        <i class="bi bi-person"></i>
+                    </button>
+                    
+                    <button class="action-btn" id="cartBtn" aria-label="Cart">
+                        <i class="bi bi-cart3"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Slider (Bootstrap Carousel) -->
+       <main role="main" id="MainContent" class="main-content">
+        <!-- Hero Slider Section -->
+        <section class="m-section m-slideshow-section">
+            <div class="container-full">
+                <div class="swiper-container hero-slider">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="m-slide">
+                                <picture>
+                                    <source media="(max-width: 767px)" srcset="//onyourshelf.pk/cdn/shop/files/OYS_Banner_500_x_600_px_0602406f-26f1-4aab-8520-ac7a7aaa0abf.jpg?v=1728571117">
+                                    <img src="background image.webp" alt="onyourshelf banner" loading="lazy" style="width: 100%; height: 100vh;">
+                                </picture>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        <!-- Most Loved Items Collection -->
+        <section class="py-5">
+            <div class="container">
+                <div class="text-start mb-4">
+                    <!-- Rest of your content here -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- Background Content Section -->
+       
+    </main>
+    
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Sticky Navbar Effect
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbar = document.getElementById('navbar');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('sticky');
+                } else {
+                    navbar.classList.remove('sticky');
+                }
+            });
+        });
+        
+        // Announcement Bar Close Function
+        function closeAnnouncement() {
+            const announcementBar = document.getElementById('announcementBar');
+            announcementBar.style.animation = 'slideOut 0.5s ease forwards';
+            
+            // Add animation for closing
+            const style = document.createElement('style');
+            style.innerHTML = `
+                @keyframes slideOut {
+                    from {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                    to {
+                        opacity: 0;
+                        transform: translateY(-100%);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Remove from DOM after animation
+            setTimeout(() => {
+                announcementBar.remove();
+            }, 500);
+            
+            // Store in localStorage
+            localStorage.setItem('announcementClosed', 'true');
+        }
+        
+        // Check if announcement was previously closed
+        document.addEventListener('DOMContentLoaded', function() {
+            if (localStorage.getItem('announcementClosed') === 'true') {
+                document.getElementById('announcementBar').style.display = 'none';
+            }
+        });
+        
+        // Action Buttons Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchBtn = document.getElementById('searchBtn');
+            const accountBtn = document.getElementById('accountBtn');
+            const cartBtn = document.getElementById('cartBtn');
+            
+            if (searchBtn) {
+                searchBtn.addEventListener('click', () => alert('Search functionality will open here'));
+            }
+            
+            if (accountBtn) {
+                accountBtn.addEventListener('click', () => window.location.href = '/account');
+            }
+            
+            if (cartBtn) {
+                cartBtn.addEventListener('click', () => alert('Cart drawer will open here'));
+            }
+            
+            function updateCartCount(count) {
+                const cartCount = document.getElementById('cartCount');
+                if (cartCount) {
+                    cartCount.textContent = count;
+                    cartCount.style.display = count > 0 ? 'flex' : 'none';
+                }
+            }
+            
+            updateCartCount(0);
+        });
+    </script>
+</body>
+</html>
